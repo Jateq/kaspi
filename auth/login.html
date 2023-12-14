@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kaspi Auth</title>
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" href="auth-styles.css">
+    <script src = "script.js" defer></script>
+
+</head>
+<body>
+<div class="container">
+    <div  class="block-auth">
+        <p>Необходимо </p>
+        <p>авторизоваться</p>
+        <form action="login_process.php" method="post">
+            <input type="tel" name="phone" id="phone" placeholder="+7 (xxx) xxx-xxxx"  required oninput="showPlusSeven()">
+
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button type="submit" class="auth-button">Вход</button>
+            <p style="font-size: 15px; text-align: center" id="error"></p>
+        </form>
+        <p style="margin-top: 40px"></p>
+        <p class="auth-text">Еще нет аккаунта?</p>
+        <div class="switch">
+            <a href="registration.html" class="auth-remove">Создать</a> </div>
+        </div>
+</div>
+<footer>
+    <div>
+        <p>Kazakhstan</p>
+        <p>&copy; 2023 Kaspi </p>
+    </div>
+</footer>
+</body>
+</html>

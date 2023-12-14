@@ -1,0 +1,11 @@
+*.gif
+*.idea
+*.DS_Store
+
+# to decrease the size of project
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.webp
+*.heic

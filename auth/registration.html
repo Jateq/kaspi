@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instagram</title>
+    <link rel="icon" href="../instagram.ico">
+    <link rel="stylesheet" href="auth-styles.css">
+    <script src = "script.js" defer></script>
+
+</head>
+<body>
+<div class="container">
+    <div>
+        <div style="margin-top: 80px" class="block-auth">
+            <p>Добро</p>
+            <p>пожаловать!</p>
+            <form action="registration_process.php" method="post">
+                <input type="text" name="name" placeholder="Имя">
+                <input type="text" name="surname" placeholder="Фамилия">
+                <input type="tel" name="phone" id="phone" placeholder="+7 (xxx) xxx-xxxx"  required oninput="showPlusSeven()">
+                <input type="password" name="password" placeholder="Пароль">
+                <button type="submit" class="auth-button">Создать</button>
+                <p id="error"></p>
+            </form>
+
+            <p class="auth-text">Есть аккаунт?</p>
+            <div class="switch">
+                <a href="login.html" class="auth-remove">Вход</a> </div>
+        </div>
+
+    </div>
+</div>
+<footer>
+    <div>
+        <p>Kazakhstan</p>
+        <p>&copy; 2023 Kaspi </p>
+    </div>
+</footer>
+
+</body>
+</html>
