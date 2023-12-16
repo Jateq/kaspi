@@ -92,7 +92,8 @@ $user = getUserByPhone($phone);
                     <h5>Выберите действие</h5>
                 </div>
 
-            <div id="first">
+            <div id="first" style="display: none">
+<!--                между своими счетами-->
                 <select id="source" name="source" class="select-placeholder" onchange="updateDestination('source')">
                     <option value="" disabled selected>Откуда</option>
                     <option value="gold">Kaspi Gold <?php echo $user["amount_money"] ?>KZT </option>
@@ -104,6 +105,51 @@ $user = getUserByPhone($phone);
                     <option value="gold">Kaspi Gold</option>
                     <option value="deposit">Deposit</option>
                 </select>
+
+                <div>
+                    <input type="number" placeholder=" 0 KZT">
+                </div>
+
+                <div>
+                    <button>Перевести</button>
+                </div>
+            </div>
+
+            <div id="second">
+                <!--                Клиенту каспи -->
+
+
+                <div style="padding:10px 0;" class="second-div">
+                    <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" color="#deaf65" height="24" viewBox="0 -960 960 960" width="24">
+                        <path fill="#deaf65"
+                              d="M880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720Zm-720 80h640v-80H160v80Zm0 160v240h640v-240H160Zm0 240v-480 480Z"/>
+                    </svg>
+                    <h1>Kaspi Gold</h1>
+                    </div>
+                    <h1 style="margin-right: 15px"><?php echo $user['amount_money'] ?> KZT</h1>
+
+                </div>
+
+                <div>
+                    <input style="margin-bottom: 0" type="tel" name="phone" id="phone" placeholder="+7 (xxx) xxx-xxxx"  required oninput="showPlusSeven()">
+                    <button style="display: none" id="checkUserButton" onclick="getUserByPhone()">Check User</button>
+                    <div id="userDetails">
+                        <h1>Деньги поступят на карту Kaspi Gold </h1>
+                    </div>
+
+
+
+
+                </div>
+
+                <div>
+                    <input id="amount" type="number" placeholder=" 0 KZT">
+                </div>
+
+                <button onclick="transferMoney(<?php echo $_SESSION['phone']?>)">
+                    Перевести
+                </button>
             </div>
 
 
@@ -113,7 +159,9 @@ $user = getUserByPhone($phone);
         </div>
     </div>
 
+<script>
 
+</script>
 
 </div>
 </body>

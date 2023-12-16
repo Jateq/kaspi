@@ -1,4 +1,6 @@
 <?php
+
+
 // Include the connection file
 include 'connect.php';
 
@@ -29,7 +31,7 @@ function getAllUsers() {
 
 function getUserByPhone($phone)
 {
-    global $conn; // Assuming $conn is your mysqli connection variable
+    global $conn;
 
     try {
         // SQL query to select a user based on phone number

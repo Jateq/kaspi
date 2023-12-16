@@ -111,3 +111,105 @@ function updateDestination(selectId) {
         }
     }
 }
+
+function showPlusSeven() {
+    var phoneInput = document.getElementById('phone');
+    if (!phoneInput.value.startsWith('+7')) {
+        phoneInput.value = '+7' + phoneInput.value;
+    }
+
+    if (phoneInput.value.length === 12) {
+        phoneInput.blur();
+    }
+
+    if (phoneInput.value.length > 12){
+        alert("Напишите номер в формате +77000700707")
+        location.reload()
+    }
+
+
+
+    var checkUserButton = document.getElementById('checkUserButton');
+    if (phoneInput.value.length === 12) {
+        checkUserButton.click();
+    }
+
+}
+
+let receiver
+
+function getUserByPhone() {
+    var phoneNumber = encodeURIComponent(document.getElementById('phone').value);
+
+
+    // Check if the phone number is not empty
+    if (phoneNumber.trim() !== "") {
+        // Create an AJAX object
+        var xhr = new XMLHttpRequest();
+
+        // Configure it: GET-request for the specified URL
+        xhr.open('GET', 'getUserByPhone.php?phone=' + phoneNumber, true);
+        // Send the request
+        xhr.send();
+
+        // This will be called after the response is received
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Parse the JSON response
+                var user = JSON.parse(xhr.responseText);
+
+                if (user === 'error'){
+                    alert("Вы не можете отправить себе")
+                    location.reload()
+                }
+                var userDetails = document.getElementById('userDetails');
+                userDetails.style.display = 'flex';
+
+                // Set the user details
+                receiver = user.phone;
+                userDetails.innerHTML = user ? user.name + ' ' + user.surname : "Такого пользователя не существует";
+                if (user) {
+                    userDetails.innerHTML += "<br><p style='font-size: 15px; margin: 5px 0 0 0; font-weight: normal'>Деньги поступят на карту Kaspi Gold</p>";
+                }
+            }
+        };
+    }
+}
+
+<!-- Add this script to your HTML file -->
+    function transferMoney(sender) {
+        var senderId = '+' + sender
+        var receiverId = receiver
+        var amount = document.getElementById('amount').value;
+
+
+        console.log(senderId, receiverId, amount)
+        // Make an AJAX request to the transfer.php file
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'transfer.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                try {
+                    // Try to parse the JSON response
+                    var result = JSON.parse(xhr.responseText);
+
+                    // Handle the result
+                    if (result.success) {
+                        alert('Успешно отправлено!');
+                        location.reload()
+                    } else {
+                        alert('Ошибка при выполнении операции ' + result.message);
+                    }
+                } catch (e) {
+                    // If parsing fails, show an error
+                    alert('Ошибка: ' + xhr.responseText);
+                }
+            }
+        };
+
+
+        // Send the data to the server
+    xhr.send('senderId=' + senderId + '&receiverId=' + receiverId + '&amount=' + amount);
+}
+

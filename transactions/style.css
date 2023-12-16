@@ -288,6 +288,83 @@ svg{
 	margin-top: -125px;
 }
 
+#second {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: space-between;
+}
+
+#second .second-div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+	width: 698px;
+	margin-top: -126px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	color: #333;
+}
+
+#second .second-div div{
+	display: flex;
+	gap: 4px;
+	flex-direction: row;
+}
+
+.second-div svg {
+
+	height: 24px;
+	width: 24px;
+	fill: #deaf65;
+	background: none;
+}
+
+.second-div h1 {
+	font-size: 20px;
+	margin: 0;
+	font-weight: normal;
+}
+
+.second-div input {
+	width: 100px; /* Adjust the width as needed */
+}
+
+#userDetails{
+	display: none;
+	width: 673px;
+	background-color: #deaf65;
+	margin-top: 8px;
+	border-radius: 4px;
+	padding: 15px 13px;
+	font-size: 20px;
+	text-align: left;
+	justify-content: left;
+	align-items: start;
+	color: white;
+}
+
+
+.displaying div{
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.displaying input{
+	width: 678px;
+	padding: 15px 10px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	color: #333;
+}
+
 .select-placeholder {
 	width: 700px;
 	padding: 15px 10px;

@@ -1,4 +1,13 @@
 
+<?php
+
+session_start ();
+if(!isset($_SESSION["login"])) {
+    header("location:../auth/login.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +48,7 @@
                                 <li style="font-weight:bold; font-size: 17px;">Сервисы Kaspi.kz</li>
                                 <li>Магазин</li>
                                 <li>Travel</li>
-                                <li><a href="../transactions/index.html">Платежи</a></li>
+                                <li><a href="index.php">Платежи</a></li>
                                 <li><a href="#">Мой банк</a></li>
                                 <li><a href="#">Переводы</a></li>
                                 <li>Акции</li>
