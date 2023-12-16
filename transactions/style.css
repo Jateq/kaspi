@@ -272,5 +272,61 @@ svg{
 
 .history-content{
 	display: none;
+	gap: 10px;
+	text-align: center;
+	justify-content: center;
+}
+.smaller{
+	text-align: center;
+	font-size: 20px;
+	font-weight: normal;
+	font-style: italic;
+	margin: 30px 10px;
+}
 
+#first{
+	margin-top: -125px;
+}
+
+.select-placeholder {
+	width: 700px;
+	padding: 15px 10px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	color: #333;
+}
+
+.select-placeholder:focus {
+	outline: none;
+	border-color: #f24634;
+}
+
+/* Style the placeholder text in the dropdown */
+.select-placeholder option[disabled] {
+	color: #aaa;
+}
+
+/* Style the dropdown arrow */
+.select-placeholder::-ms-expand,
+.select-placeholder::-ms-clear {
+	display: none;
+}
+
+.select-placeholder::after {
+	content: '\25BC';
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+	pointer-events: none;
+	color: #555;
+}
+
+/* Style for the selected option */
+.select-placeholder option:checked {
+	background-color: #f24634;
+	color: #fff;
 }

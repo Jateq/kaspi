@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function showTabContent(tab) {
+
     // Remove "active" class from all tabs
     const tabs = document.querySelectorAll('.tab div');
     tabs.forEach(t => t.classList.remove('active'));
@@ -81,8 +82,32 @@ function showTabContent(tab) {
 
     // Show the corresponding content based on the clicked tab
     if (tab.innerText === 'Мои переводы') {
-        document.querySelector('.elements').style.display = 'block';
+        document.querySelector('.elements').style.display = 'flex';
     } else if (tab.innerText === 'История') {
-        document.querySelector('.history-content').style.display = 'block';
+        document.querySelector('.history-content').style.display = 'flex';
+    }
+}
+
+function updateDestination(selectId) {
+    var sourceSelect = document.getElementById("source");
+    var destinationSelect = document.getElementById("destination");
+
+    // Get the selected value from the triggering select
+    var selectedValue = sourceSelect.options[sourceSelect.selectedIndex].value;
+    var destinationValue = destinationSelect.options[destinationSelect.selectedIndex].value;
+
+    // Update the destination select based on the selected value
+    if (selectId === "source") {
+        if (selectedValue === "gold") {
+            destinationSelect.value = "deposit";
+        } else if (selectedValue === "deposit") {
+            destinationSelect.value = "gold";
+        }
+    } else if (selectId === "destination") {
+        if (destinationValue === "gold") {
+            sourceSelect.value = "deposit";
+        } else if (destinationValue === "deposit") {
+            sourceSelect.value = "gold";
+        }
     }
 }

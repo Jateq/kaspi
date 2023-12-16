@@ -5,6 +5,14 @@ if(!isset($_SESSION["login"])) {
     header("location:../auth/login.html");
     exit();
 }
+
+include "../user.php";
+
+$users = getAllUsers();
+
+$phone = $_SESSION['phone']; // Replace with the actual phone number
+$user = getUserByPhone($phone);
+
 ?>
 
 
@@ -64,22 +72,43 @@ if(!isset($_SESSION["login"])) {
                 <p>Kaspi QR</p>
             </div>
 
-            <div class="history-content">
 
-                <div>hello</div>
-            </div>
 
 
         </div>
+
+        <div class="history-content">
+
+            <div>
+                <p class="smaller">Вы еще не совершали никакие переводы</p>
+            </div>
+        </div>
     </div>
 
-    <div class="displaying">
-        <!--    <div>-->
-        <!--        <img src="images/logo.png" alt="logo">-->
-        <!--        <h5>Выберите платеж</h5>-->
-        <!--    </div>-->
+        <div class="displaying">
 
-        <div>
+                <div id="default" style="display: none">
+                    <img src="images/logo.png" alt="logo">
+                    <h5>Выберите действие</h5>
+                </div>
+
+            <div id="first">
+                <select id="source" name="source" class="select-placeholder" onchange="updateDestination('source')">
+                    <option value="" disabled selected>Откуда</option>
+                    <option value="gold">Kaspi Gold <?php echo $user["amount_money"] ?>KZT </option>
+                    <option value="deposit">Deposit</option>
+                </select>
+
+                <select id="destination" name="destination" class="select-placeholder" onchange="updateDestination('destination')">
+                    <option value="" disabled selected>Куда</option>
+                    <option value="gold">Kaspi Gold</option>
+                    <option value="deposit">Deposit</option>
+                </select>
+            </div>
+
+
+
+            <div>
 
         </div>
     </div>
