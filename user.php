@@ -58,5 +58,35 @@ function getUserByPhone($phone)
     }
 }
 
+function getUserByCard($cardNumber)
+{
+    global $conn;
+
+    try {
+        // SQL query to select a user based on card number
+        $sql = "SELECT * FROM users WHERE card_number = ?";
+
+        // Use prepared statement to prevent SQL injection
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $cardNumber);
+
+        // Execute the query
+        $stmt->execute();
+
+        // Get the result
+        $result = $stmt->get_result();
+
+        // Fetch the user as an associative array
+        $user = $result->fetch_assoc();
+
+        // Return the result
+        return $user;
+    } catch (Exception $e) {
+        // Handle database connection errors
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+
+
 
 

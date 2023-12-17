@@ -136,6 +136,16 @@ function showPlusSeven() {
 
 }
 
+function autoCard(){
+    const card = document.getElementById('card_receiver');
+    const checkUserButton = document.getElementById('checkUserButtonCard');
+
+    if(card.value.length === 16){
+        card.blur();
+        checkUserButton.click();
+    }
+}
+
 let receiver
 
 function getUserByPhone() {
@@ -166,9 +176,10 @@ function getUserByPhone() {
                 userDetails.style.display = 'flex';
 
                 // Set the user details
-                receiver = user.phone;
+
                 userDetails.innerHTML = user ? user.name + ' ' + user.surname : "Такого пользователя не существует";
                 if (user) {
+                    receiver = user.phone;
                     userDetails.innerHTML += "<br><p style='font-size: 15px; margin: 5px 0 0 0; font-weight: normal'>Деньги поступят на карту Kaspi Gold</p>";
                 }
             }
@@ -198,6 +209,9 @@ function getUserByPhone() {
                     if (result.success) {
                         alert('Успешно отправлено!');
                         location.reload()
+                    }else if(result==="Недостаточно средств"){
+                        alert("Недостаточно средств");
+                        location.reload();
                     } else {
                         alert('Ошибка при выполнении операции ' + result.message);
                     }
@@ -213,3 +227,142 @@ function getUserByPhone() {
     xhr.send('senderId=' + senderId + '&receiverId=' + receiverId + '&amount=' + amount);
 }
 
+
+function showSection(sectionId) {
+    // Hide all sections
+    var sections = document.querySelectorAll('.displaying > div');
+    sections.forEach(function (section) {
+        section.style.display = 'none';
+    });
+
+    // Show the selected section
+    var selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.style.display = 'flex';
+    }
+}
+
+
+function transferMoneyFromCard(sender) {
+    var senderId = '+' + sender
+    var amount = document.getElementById('amount_card').value ;
+    var cardNumber = document.getElementById('card_receiver').value;
+    console.log(senderId, amount, cardNumber)
+    // Make an AJAX request to the transfer.php file
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'transfer_card.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            try {
+                // Try to parse the JSON response
+                var result = JSON.parse(xhr.responseText);
+                console.log(result);
+                // Handle the result
+                if (result.success) {
+                    alert('Успешно отправлено!');
+                    location.reload()
+                }else if(result === "Такой карты не существует"){
+                    alert("Такой карты не существует")
+                    location.reload();
+                } else if(result==="Недостаточно средств"){
+                    alert("Недостаточно средств");
+                    location.reload();
+                }
+                else {
+                    alert('Ошибка при выполнении операции ' + result.message);
+                }
+            } catch (e) {
+                // If parsing fails, show an error
+                alert('Ошибка: ' + xhr.responseText);
+            }
+        }
+    };
+
+
+    // Send the data to the server
+    xhr.send('senderId=' + senderId + '&cardNumber=' + cardNumber + '&amount=' + amount);
+
+}
+
+function transferMoneyFromCardtf(sender) {
+    var senderId = '+' + sender
+    var amount = document.getElementById('amount_card_tf').value ;
+    var cardNumber = document.getElementById('card_receiver_tf').value;
+    console.log(senderId, amount, cardNumber)
+    // Make an AJAX request to the transfer.php file
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'transfer_card_tf.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            try {
+                // Try to parse the JSON response
+                var result = JSON.parse(xhr.responseText);
+                console.log(result);
+                // Handle the result
+                if (result.success) {
+                    alert('Успешно отправлено!');
+                    location.reload()
+                }else if(result === "Такой карты не существует"){
+                    alert("Такой карты не существует")
+                    location.reload();
+                } else if(result==="Недостаточно средств"){
+                    alert("Недостаточно средств");
+                    location.reload();
+                }
+                else {
+                    alert('Ошибка при выполнении операции ' + result.message);
+                }
+            } catch (e) {
+                // If parsing fails, show an error
+                alert('Ошибка: ' + xhr.responseText);
+            }
+        }
+    };
+
+
+    // Send the data to the server
+    xhr.send('senderId=' + senderId + '&cardNumber=' + cardNumber + '&amount=' + amount);
+
+}
+
+
+
+function getUserByCard() {
+    var card = encodeURIComponent(document.getElementById('card_receiver').value);
+
+
+    // Check if the phone number is not empty
+    if (card.trim() !== "") {
+        // Create an AJAX object
+        var xhr = new XMLHttpRequest();
+
+        // Configure it: GET-request for the specified URL
+        xhr.open('GET', 'getUserByCard.php?card=' + card, true);
+        // Send the request
+        xhr.send();
+
+        // This will be called after the response is received
+        xhr.onreadystatechange = function () {
+                try {
+                    // Parse the JSON response
+                    var user = JSON.parse(xhr.responseText);
+
+                    if (user && user !== 'error') {
+                        var userDetails = document.getElementById('userDetailsCard');
+                        userDetails.style.display = 'flex';
+                        userDetails.innerHTML = user.name + ' ' + user.surname +
+                            "<br><p style='font-size: 15px; margin: 5px 0 0 0; font-weight: normal'>Деньги поступят на карту Kaspi Gold</p>";
+                    } else {
+                        alert("Вы не можете отправить себе");
+                        location.reload();
+                    }
+                } catch (e) {
+                    var userDetails = document.getElementById('userDetailsCard');
+                    userDetails.innerHTML = user ? user.name + ' ' + user.surname : "Такого пользователя не существует";
+
+                }
+
+        };
+    }}

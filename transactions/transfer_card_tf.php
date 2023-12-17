@@ -1,26 +1,19 @@
 <?php
-include '../connect.php'; // users.Assuming you have a filusers.e for database connection
 
-function transferMoney($senderId, $receiverId, $amount)
+
+include '../connect.php';
+
+function transferMoneyFromCardtf($senderId, $amount, $cardNumber)
 {
     global $conn;
 
     try {
-        // Update sender's amount
-        $sqlSender = "UPDATE users SET amount_money = amount_money - ? WHERE phone = ?";
+        $sqlSender = "UPDATE users SET amount_money = amount_money - 250.0 - ? WHERE phone = ?";
         $stmtSender = $conn->prepare($sqlSender);
         $stmtSender->bind_param("di", $amount, $senderId);
         $stmtSender->execute();
-        recordTransaction("+".trim($senderId), 'perevod', 'перевод на ' . "+".trim($receiverId), $amount);
+        recordTransaction("+".trim($senderId), 'perevod', 'перевод на карту другого банка ' . $cardNumber, $amount);
 
-        // Update receiver's amount
-        $sqlReceiver = "UPDATE users SET amount_money = amount_money + ? WHERE phone = ?";
-        $stmtReceiver = $conn->prepare($sqlReceiver);
-        $stmtReceiver->bind_param("di", $amount, $receiverId);
-        $stmtReceiver->execute();
-        recordTransaction("+".trim($receiverId), 'perevod', 'перевод от ' . "+".trim($senderId), $amount);
-
-        // Return success
         return true;
     } catch (Exception $e) {
         // Handle database connection errors
@@ -31,21 +24,46 @@ function transferMoney($senderId, $receiverId, $amount)
 
 // Get the user details from the POST request
 $senderId = $_POST['senderId'];
-$receiverId = $_POST['receiverId'];
 $amount = $_POST['amount'];
+$cardNumber = $_POST['cardNumber'];
 
 $curAmount = getCurrentAmount($senderId);
 if($curAmount < $amount){
     echo json_encode('Недостаточно средств');
     return;
 }
+function isLuhnValid($number)
+{
+    $sum = 0;
+    $numDigits = strlen($number);
+    $parity = $numDigits % 2;
 
+    for ($i = $numDigits - 1; $i >= 0; $i--) {
+        $digit = (int)$number[$i];
+        if ($i % 2 == $parity) {
+            $digit *= 2;
+            if ($digit > 9) {
+                $digit -= 9;
+            }
+        }
+        $sum += $digit;
+    }
+
+    return $sum % 10 == 0;
+}
+
+if (!isLuhnValid($cardNumber)) {
+    echo json_encode('Такой карты не существует');
+    return;
+}
 
 // Call the transfer function
-$result = transferMoney($senderId, $receiverId, $amount);
+$result = transferMoneyFromCardtf($senderId, $amount, $cardNumber);
+
 
 // Send the result back as JSON
 echo json_encode(['success' => $result]);
+
 
 function getCurrentAmount($senderId)
 {

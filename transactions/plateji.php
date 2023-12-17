@@ -1,5 +1,5 @@
 <?php
-
+include "../connect.php";
 session_start ();
 if(!isset($_SESSION["login"])) {
     header("location:../auth/login.html");
@@ -28,13 +28,16 @@ if(!isset($_SESSION["login"])) {
 
         <h6>Платежи</h6>
     </div>
-    <div class="tab"></div>
+    <div class="tab">
+        <div class="active" onclick="showTabContent(this)">Мои переводы</div>
+        <div onclick="showTabContent(this)">История</div>
+    </div>
     <div class="my_search">
         <svg xmlns="http://www.w3.org/2000/svg" height="24"   viewBox="0 -960 960 960" width="24"><path fill="#f24634" d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
         <input id="searchInput" placeholder="Search" oninput="filterElements()">
     </div>
     <div class="elements">
-        <div class="elements-div">
+        <div class="elements-div" onclick="showSection('mobilnyi')">
             <svg xmlns="http://www.w3.org/2000/svg" height="24"  viewBox="0 -960 960 960" width="24"><path fill="#f24634" d="M280-40q-33 0-56.5-23.5T200-120v-720q0-33 23.5-56.5T280-920h400q33 0 56.5 23.5T760-840v720q0 33-23.5 56.5T680-40H280Zm0-200v120h400v-120H280Zm200 100q17 0 28.5-11.5T520-180q0-17-11.5-28.5T480-220q-17 0-28.5 11.5T440-180q0 17 11.5 28.5T480-140ZM280-320h400v-400H280v400Zm0-480h400v-40H280v40Zm0 560v120-120Zm0-560v-40 40Z"/></svg>
             <p>Мобильный</p>
         </div>
@@ -98,21 +101,49 @@ if(!isset($_SESSION["login"])) {
         </div>
 
     </div>
+
+    <div class="history-content" style="display: none">
+
+        <?php
+
+        $transactionHistory = getTransactionHistory($_SESSION['phone'], 'platej');
+
+        if ($transactionHistory) {
+            foreach ($transactionHistory as $transaction) {
+                // Display transaction details
+                echo '<div class="history">';
+                echo '<p style="width: 250px">' . $transaction['name']. ' ' . $transaction['amount']  . 'KZT '.'  </p>';
+                echo '<p>' . $transaction['created_at'] . '</p>';
+                echo '</div>';
+            }
+        } else {
+            // Display message if there are no transactions
+            echo '<div>';
+            echo '<p class="smaller">Вы еще не совершали никакие платежи</p>';
+            echo '</div>';
+        }
+        ?>
+
+
+
+
 </div>
+</div>
+    <div class="displaying" style="display: none;">
+        <div id="default" >
+            <img src="images/logo.png" alt="logo">
+            <h5>Выберите действие</h5>
+        </div>
+    </div>
 
-<div class="displaying">
-<!--    <div>-->
-<!--        <img src="images/logo.png" alt="logo">-->
-<!--        <h5>Выберите платеж</h5>-->
-<!--    </div>-->
-
-    <div>
+    <div id="mobilnyi" class="platej-block">
+        <div>Altel</div>
+        <div>Beeline</div>
+        <div>Kcell</div>
+        <div>Tele2</div>
+        <div>Izi</div>
 
     </div>
-</div>
-
-
-
 </div>
 </body>
 </html>

@@ -243,6 +243,7 @@ svg{
 }
 
 .elements-div{
+	cursor: pointer;
 	width: 100%;
 	background-color: #ffffff;
 	border: solid 1px #e3e3e3;
@@ -270,18 +271,17 @@ svg{
 	width: 150px;
 }
 
-.history-content{
-	display: none;
-	gap: 10px;
-	text-align: center;
-	justify-content: center;
-}
+
 .smaller{
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	padding-left: 90px;
 	text-align: center;
 	font-size: 20px;
 	font-weight: normal;
 	font-style: italic;
-	margin: 30px 10px;
 }
 
 #first{
@@ -309,7 +309,97 @@ svg{
 	color: #333;
 }
 
+.platej-block{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: space-between;
+	margin-top: 250px;
+}
+
+.platej-block div {
+	margin-left: 600px;
+	padding: 15px 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+	width: 698px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	color: #333;
+
+}
+
 #second .second-div div{
+	display: flex;
+	gap: 4px;
+	flex-direction: row;
+}
+
+#third {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: space-between;
+}
+
+
+#third .second-div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 15px;
+	width: 698px;
+	margin-top: -126px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	color: #333;
+}
+#third .second-div div{
+	display: flex;
+	gap: 4px;
+	flex-direction: row;
+}
+
+#kom{
+	width: 678px;
+	padding: 15px 10px;
+	border-radius: 4px;
+	font-size: 17px;
+	text-align: left;
+	justify-content: left;
+	align-items: start;
+	background-color: white;
+	border: 1px solid #ccc;
+}
+
+#fourth {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: space-between;
+}
+
+
+#fourth .second-div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 15px;
+	width: 698px;
+	margin-top: -126px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	color: #333;
+}
+#fourth .second-div div{
 	display: flex;
 	gap: 4px;
 	flex-direction: row;
@@ -347,6 +437,53 @@ svg{
 	color: white;
 }
 
+#userDetailsCard{
+	display: none;
+	width: 673px;
+	background-color: #deaf65;
+	margin-top: 8px;
+	border-radius: 4px;
+	padding: 15px 13px;
+	font-size: 20px;
+	text-align: left;
+	justify-content: left;
+	align-items: start;
+	color: white;
+}
+
+.history-content{
+	display: flex;
+	gap: 10px;
+	flex-direction: column;
+}
+
+.history{
+	background-color: white;
+	border: 1px solid #e1e1e1;
+	display: flex;
+	border-radius: 5px;
+	padding: 10px 10px;
+	justify-content: space-between;
+
+}
+
+.history p{
+	margin: 0; padding: 0;
+	font-size: 20px;
+	font-weight: normal;
+}
+
+#fifth .oppi{
+	margin-top: -150px;
+	background-color: white;
+	width: 700px;
+	border-radius: 5px;
+	height: 600px;
+}
+
+.oppi img{
+	width: 500px;
+}
 
 .displaying div{
 	display: flex;

@@ -1,7 +1,9 @@
 <?php
-include '../connect.php'; // users.Assuming you have a filusers.e for database connection
 
-function transferMoney($senderId, $receiverId, $amount)
+include '../user.php';
+
+
+function transferMoneyFromCard($senderId, $amount, $cardNumber)
 {
     global $conn;
 
@@ -11,16 +13,17 @@ function transferMoney($senderId, $receiverId, $amount)
         $stmtSender = $conn->prepare($sqlSender);
         $stmtSender->bind_param("di", $amount, $senderId);
         $stmtSender->execute();
-        recordTransaction("+".trim($senderId), 'perevod', 'перевод на ' . "+".trim($receiverId), $amount);
+        recordTransaction( "+".trim($senderId), 'perevod', 'перевод на карту каспи ' . $cardNumber, $amount);
 
         // Update receiver's amount
-        $sqlReceiver = "UPDATE users SET amount_money = amount_money + ? WHERE phone = ?";
+        $sqlReceiver = "UPDATE users SET amount_money = amount_money + ? WHERE card_number = ?";
         $stmtReceiver = $conn->prepare($sqlReceiver);
-        $stmtReceiver->bind_param("di", $amount, $receiverId);
+        $stmtReceiver->bind_param("ds", $amount, $cardNumber);
         $stmtReceiver->execute();
-        recordTransaction("+".trim($receiverId), 'perevod', 'перевод от ' . "+".trim($senderId), $amount);
+        $tempUser = getUserByCard($cardNumber);
+        recordTransaction($tempUser['phone'], 'perevod', 'перевод от ' . "+".trim($senderId), $amount);
 
-        // Return success
+
         return true;
     } catch (Exception $e) {
         // Handle database connection errors
@@ -29,10 +32,12 @@ function transferMoney($senderId, $receiverId, $amount)
     }
 }
 
+
 // Get the user details from the POST request
 $senderId = $_POST['senderId'];
-$receiverId = $_POST['receiverId'];
 $amount = $_POST['amount'];
+$cardNumber = $_POST['cardNumber'];
+
 
 $curAmount = getCurrentAmount($senderId);
 if($curAmount < $amount){
@@ -41,11 +46,15 @@ if($curAmount < $amount){
 }
 
 
+
 // Call the transfer function
-$result = transferMoney($senderId, $receiverId, $amount);
+$result = transferMoneyFromCard($senderId, $amount, $cardNumber);
+
+
 
 // Send the result back as JSON
 echo json_encode(['success' => $result]);
+
 
 function getCurrentAmount($senderId)
 {
