@@ -310,34 +310,64 @@ svg{
 }
 
 .platej-block{
-	display: flex;
+	display: none;
 	flex-direction: column;
 	gap: 10px;
 	justify-content: space-between;
-	margin-top: 250px;
+	margin-top: -116px;
 }
 
-.platej-block div {
-	margin-left: 600px;
-	padding: 15px 10px;
+.platej-block .main {
+	padding: 5px 10px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	gap: 10px;
-	width: 698px;
+	width: 677px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	background-color: #fff;
 	color: #333;
 
 }
+.platej-block svg{
+	background: none;
+
+}
+
+.main .kaspian{
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	padding: 0;
+}
+
+.kaspian h1{
+	font-weight: normal;
+	font-size: 18px;
+}
+
+.platej-block input{
+	width: 700px;
+	background-color: white;
+	padding: 20px 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.platej-block p {
+	font-size: 18px;
+	font-weight: normal;
+}
+
 
 #second .second-div div{
 	display: flex;
 	gap: 4px;
 	flex-direction: row;
 }
+
 
 #third {
 	display: flex;
