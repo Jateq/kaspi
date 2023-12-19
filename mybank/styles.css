@@ -1,0 +1,255 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: Roboto, sans-serif;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-container {
+    width: 40%;
+    height: 100vh;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+button{
+    margin-top: 35px;
+    background-color: #0089d0;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px 100px;
+    transition: 0.3s;
+}
+button:hover{
+    background-color: #00679d;
+    color: #ffffff;
+}
+
+.info-block{
+    width: 500px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+input{
+    width: 500px;
+    padding:  10px 10px 10px 10px;
+    border: none;
+    background-color: #ffffff;
+    font-size: 18px;
+    border-radius: 5px;
+
+}
+
+input::placeholder{
+    font-size: 18px;
+}
+
+.right-container {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    flex: 1;
+    background-color: #f0f0f0;
+
+}
+
+.right-container h5{
+    margin: 35px 0;
+    font-size: 50px;
+}
+
+.left-top {
+    padding: 0 15px 25px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.home-button{
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    padding: 10px ;
+    margin-left: 12px;
+    background-color: #f0f0f0;
+}
+
+#first {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+#fifth {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+
+.history-content{
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    max-height: 500px;
+    overflow: scroll;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.history{
+    background-color: white;
+    border: 1px solid #e1e1e1;
+    display: flex;
+    border-radius: 5px;
+    padding: 10px 10px;
+    justify-content: space-between;
+
+}
+
+.history p{
+    margin: 0; padding: 0;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+
+
+#second {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+#third {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+#second .second-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 698px;
+    margin-top: -126px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+}
+
+
+
+.right-container img{
+    width: 150px;
+}
+
+
+
+.mybank-title {
+    font-size: 30px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+}
+
+.left-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 55px 20px 25px;
+}
+
+.goldcard-tab, .messages-tab {
+    width: 100%;
+    height: 85px;
+    border: 3px solid #f0f0f0;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.goldcard-tab:hover, .goldcard-tab:active, .messages-tab:active, .messages-tab:hover {
+    box-shadow: 0 0 10px #f24634; 
+    outline: 1.5px solid #f24634; 
+}
+
+.bonus-tab:hover, .bonus-tab:active {
+    box-shadow: 0 0 10px #58a000; 
+    outline: 1.5px solid #58a000; 
+}
+
+.bonus-tab {
+    width: 100%;
+    height: 85px;
+    border: 3px solid #f0f0f0;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-image {
+    height: 50px;
+}
+
+.card-title {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.card-title-up {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.gold-money {
+    font-size: 20px;
+}
+
+.messages-tab{
+    justify-content: center;
+}
+.messages-title {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.card-title-bonus {
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 10px;
+}

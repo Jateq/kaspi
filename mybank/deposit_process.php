@@ -2,19 +2,23 @@
 
 include '../connect.php';
 
-function transfer($senderId, $amount, $type, $spendBonuses)
+function transfer($senderId, $amount, $type)
 {
     global $conn;
 
     try {
-        $bonusMultiplier = $spendBonuses ? 0.01 : 0; // Adjust bonus multiplier based on the checkbox
-        $bonus = $bonusMultiplier * $amount;
+        // Deduct the amount from the user's amount_money
+        $sqlDeduct = "UPDATE users SET amount_money = amount_money - ? WHERE phone = ?";
+        $stmtDeduct = $conn->prepare($sqlDeduct);
+        $stmtDeduct->bind_param("di", $amount, $senderId);
+        $stmtDeduct->execute();
 
-        $sqlSender = "UPDATE users SET amount_money = amount_money - ?, bonus = bonus + ? WHERE phone = ?";
-        $stmtSender = $conn->prepare($sqlSender);
-        $stmtSender->bind_param("ddi", $amount, $bonus, $senderId);
-        $stmtSender->execute();
-        recordTransaction("+".trim($senderId), 'platej', $type , $amount);
+        recordTransaction($senderId, 'deposit', $type, $amount);
+
+        $sqlDeposit = "UPDATE users SET deposit = deposit + ? WHERE phone = ?";
+        $stmtDeposit = $conn->prepare($sqlDeposit);
+        $stmtDeposit->bind_param("di", $amount, $senderId);
+        $stmtDeposit->execute();
 
         return true;
     } catch (Exception $e) {
@@ -28,16 +32,15 @@ function transfer($senderId, $amount, $type, $spendBonuses)
 $senderId = $_POST['senderId'];
 $amount = $_POST['amount'];
 $type = $_POST['type'];
-$spendBonuses = isset($_POST['spendBonuses']) ? (bool)$_POST['spendBonuses'] : false;
 
 $curAmount = getCurrentAmount($senderId);
 if ($curAmount < $amount) {
-    echo json_encode('Недостаточно средств');
+    echo json_encode($senderId);
     return;
 }
 
 // Call the transfer function
-$result = transfer($senderId, $amount, $type, $spendBonuses);
+$result = transfer($senderId, $amount, $type);
 
 // Send the result back as JSON
 echo json_encode(['success' => $result]);

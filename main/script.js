@@ -39,33 +39,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// const slider = document.querySelector('.sample-slider');
 
-// const swiper = new Swiper(slider, {
-//     loop: true,
-//     speed: 2000,
-//     slidesPerView: 3,
-//     autoplay: {
-//         delay: 0,
-//         pauseOnMouseEnter: true,
-//         disableOnInteraction: true,
-//         reverseDirection: false,
-//     },
-// });
 
-// slider.addEventListener('mouseenter', () => {
-//     swiper.autoplay.stop();
-// });
-
-// slider.addEventListener('mouseleave', () => {
-//     swiper.autoplay.start();
-// });
-
-const swiper = new Swiper('.swiper', {
-  // Optional parameters
+var swiper = new Swiper('.swiper', {
+  
   direction: 'horizontal',
   loop: true,
-  slidesPerView: 3,
+  slidesPerView: 5,
 
   // Navigation arrows
   navigation: {
@@ -74,3 +54,4 @@ const swiper = new Swiper('.swiper', {
   },
 
 });
+

@@ -48,9 +48,9 @@ if(!isset($_SESSION["login"])) {
                                 <li style="font-weight:bold; font-size: 17px;">Сервисы Kaspi.kz</li>
                                 <li>Магазин</li>
                                 <li>Travel</li>
-                                <li><a href="index.php">Платежи</a></li>
+                                <li><a href=../transactions/index.php>Платежи</a></li>
                                 <li><a href="#">Мой банк</a></li>
-                                <li><a href="#">Переводы</a></li>
+                                <li><a href="../transactions/perevody.php">Переводы</a></li>
                                 <li>Акции</li>
                                 <li>Госуслуги</li>
                                 <li>Объявления</li>
@@ -91,7 +91,7 @@ if(!isset($_SESSION["login"])) {
                 </li>
             </ul>
         </div>
-        <a href="../settings/index.php" class="navbar-user">USER</a>
+        <a href="../main/user.php" class="navbar-user">Профиль</a>
     </div>
 </nav>
 

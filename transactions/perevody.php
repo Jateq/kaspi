@@ -114,23 +114,26 @@ $user = getUserByPhone($phone);
             <!--                между своими счетами-->
             <select id="source" name="source" class="select-placeholder" onchange="updateDestination('source')">
                 <option value="" disabled selected>Откуда</option>
-                <option value="gold">Kaspi Gold <?php echo $user["amount_money"] ?>KZT</option>
-                <option value="deposit">Deposit</option>
+                <option value="gold">Kaspi Gold <?php echo $user["amount_money"] ?> KZT</option>
+
+                <option value="deposit">Deposit <?php echo $user['deposit']?> KZT</option>
             </select>
 
             <select id="destination" name="destination" class="select-placeholder"
                     onchange="updateDestination('destination')">
                 <option value="" disabled selected>Куда</option>
-                <option value="gold">Kaspi Gold</option>
-                <option value="deposit">Deposit</option>
+                <option value="gold">Kaspi Gold <?php echo $user["amount_money"] ?> KZT</option>
+
+                <option value="deposit">Deposit <?php echo $user['deposit']?> KZT</option>
+
             </select>
 
             <div>
-                <input type="number" placeholder=" 0 KZT">
+                <input type="number" id="amount_dep1" placeholder=" 0 KZT">
             </div>
 
             <div>
-                <button>Перевести</button>
+                <button onclick="transferDepo(<?php echo $phone ?>, document.getElementById('amount_dep1').value, 'пополнение депозита')">Перевести</button>
             </div>
         </div>
 

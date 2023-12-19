@@ -180,6 +180,7 @@ footer p{
 .navbar-menu li {
     display: inline-block;
     position: relative;
+    cursor: pointer;
 }
 
 .navbar-title {
@@ -264,6 +265,7 @@ footer p{
 .tooltip-ul li{
     margin-right: 30px;
     margin-top: 15px;
+    cursor: pointer;
 
 }
 

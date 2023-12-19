@@ -139,6 +139,10 @@ if(!isset($_SESSION["login"])) {
 
 
         </div>
+        <div class="main" style="font-size: 15px; display: flex; justify-content: space-between">
+            <input type="checkbox" id="spendBonuses" class="main">
+            <p>Потратить бонусы <?php echo $user['bonus']?></p>
+        </div>
         <button onclick="transferPlatej(<?php echo $_SESSION['phone'] ?>, 'пополнение мобильного', document.getElementById('amounter').value)">
             К оплате
         </button>
